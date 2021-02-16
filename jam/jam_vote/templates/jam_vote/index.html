@@ -3,6 +3,7 @@
 
 <h1>hello</h1>
 
-<button class="btn btn-primary">投票を作る</button>
+<a href="{% url 'jam_vote:make' %}" class="btn btn-primary">投票を作る</a>
+<a href="/admin" target="_blank" class="btn btn-secondary">管理画面に飛ぶ</a>
 
 {% endblock %}

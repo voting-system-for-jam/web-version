@@ -8,11 +8,18 @@
 
         <form action="" method="post"　enctype='multipart/form-data'>
             {% csrf_token %}　
-            <div class="form-group">
-                <label>タイトル</label>
-                {{ form.title }}
+            <div class="form-group" id="file-area">
+                <!-- <label>タイトル</label> -->
+                {{ question.title }}
+                {{ formset.management_form }}
+                {% for form in formset %}
+                {{ form.DELETE }}
+                <p>{{ form.teamname }}</p>
+                {% endfor %}
+                <!-- {{formset}} -->
             </div>
             <button type="submit" class="btn btn-primary">保存</button>
+            <button id="add" type="button" class="btn btn-primary">ファイルの追加</button>
             <br><br>
         </form>
         
@@ -20,3 +27,34 @@
 </div>
 
 {% endblock %}
+
+{% block extrajs%}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+    $(function(){
+        var initialManageElement = $('input#id_form-INITIAL_FORMS');
+        console.log(initialManageElement);
+        var totalManageElement = $('input#id_form-TOTAL_FORMS');
+        var currentFileCount = parseInt(totalManageElement.val());
+        $('button#add').on('click', function(){
+            var nameElement = $('<input>', {
+                type: 'text',
+                name: 'form-' + currentFileCount + '-teamname',
+                id: 'id_form-' + currentFileCount + '-teamname',
+                maxlength: '30',
+                class:"form-control",
+            });
+            var deleteElement = $('<input>', {
+                type:"checkbox",
+                name:"form-" + currentFileCount + "-DELETE",
+                id:"id_form-" + currentFileCount + "-DELETE",
+            });
+            $('div#file-area').append(deleteElement);
+            $('div#file-area').append(nameElement);
+            // $('div#file-area').append(fileElement);
+            currentFileCount += 1;
+            totalManageElement.attr('value', currentFileCount);
+        });
+    });
+    </script>    
+{% endblock%}
