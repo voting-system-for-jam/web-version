@@ -25,6 +25,6 @@ class TeamForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
-PostCreateFormSet = forms.modelformset_factory(
-    Team, form=TeamForm, extra=0, can_delete=True
+PostCreateFormSet = forms.inlineformset_factory(
+    Question, Team, fields='__all__', form=TeamForm, extra=1, can_delete=True
 )

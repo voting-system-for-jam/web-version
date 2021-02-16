@@ -20,8 +20,10 @@ class Question(models.Model):
 
 
 class Team(models.Model):
-    # title = models.ForeignKey(Question, on_delete=models.PROTECT)
     teamname = models.CharField('チーム名', max_length=30)
+    title = models.ForeignKey(Question, verbose_name='タイトル',
+        blank=True, null=True,
+        on_delete=models.SET_NULL)
 
 class YourTeam(models.Model):
     teamname = models.CharField('チーム名', max_length=30)
