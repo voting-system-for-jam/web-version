@@ -11,5 +11,5 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     # カンマをつけることで、リストと認識させる
-    list_display = ('teamname',)
+    list_display = ('teamname','title')
     list_display_links = ('teamname',)
