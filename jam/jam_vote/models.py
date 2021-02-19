@@ -18,12 +18,14 @@ from django.db import models
 class Question(models.Model):
     title = models.CharField('タイトル', max_length=100)
 
+    def __str__(self):
+        return self.title
 
 class Team(models.Model):
     teamname = models.CharField('チーム名', max_length=30)
     title = models.ForeignKey(Question, verbose_name='タイトル',
-        blank=True, null=True,
-        on_delete=models.SET_NULL)
+        blank=False, null=False,
+        on_delete=models.CASCADE)
 
 class YourTeam(models.Model):
     teamname = models.CharField('チーム名', max_length=30)

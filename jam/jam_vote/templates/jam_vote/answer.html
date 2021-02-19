@@ -1,8 +1,50 @@
 {% extends 'jam_vote/base.html' %}
 {% block content %}
 
-<h1>hello</h1>
+<h1>{{object.title}}</h1>
 
-<button class="btn btn-primary">投票を作る</button>
+<div class="card text-white bg-success mb-3" style="max-width: 18rem">
+    <div class="card-header">あなたのチーム</div>
+    <div class="card-body">
+        <p class="card-text">
+            あなたのチームを選んでください
+        </p>
+        <select class="select form-select">
+            {% for team in team_list %}
+            <option value="1">{{ team.teamname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem">
+    <div class="card-header">トリにしたいチーム</div>
+    <div class="card-body">
+        <p class="card-text">
+            トリにしたいチームを選んでください
+        </p>
+        <select class="select form-select">
+            {% for team in team_list %}
+            <option value="1">{{ team.teamname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="card text-white bg-danger mb-3" style="max-width: 18rem">
+    <div class="card-header">好きなチーム</div>
+    <div class="card-body">
+        <p class="card-text">
+            好きなチームを選んでください
+        </p>
+        <select class="select form-select">
+            {% for team in team_list %}
+            <option value="1">{{ team.teamname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<a href="{% url 'jam_vote:make' %}" class="btn btn-primary">投票</a>
 
 {% endblock %}

@@ -9,21 +9,20 @@
     target="_blank"
     class="btn btn-secondary">管理画面に飛ぶ</a>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-            Some quick example text to build on the card title and make up the bulk of the
-            card's content.
-        </p>
-        <a type="button"
-            class="btn btn-primary"
-            href="{% url 'jam_vote:answer' %}">Button</a>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for question in question_list %}
+    <div class="col">
+        <div class="card border border-primary shadow-0 mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ question.title }}</h5>
+                <a type="button"
+                class="btn btn-primary"
+                href="{% url 'jam_vote:answer' question.pk %}">投票する</a>
+            </div>
+        </div>
     </div>
+    {% endfor %}
 </div>
 
-{% for title in question_list %}
-<p>{{title.title}}</p>
-{% endfor %}
 
 {% endblock %}

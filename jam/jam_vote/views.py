@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 
-from .models import Question
+from .models import Question, Team
 from .forms import QuestionForm, TeamForm, PostCreateFormSet
 
 # Create your views here.
@@ -57,5 +57,15 @@ def add(request):
     return render(request, 'jam_vote/make.html', context)
 
 
-class AnswerView(TemplateView):
+class AnswerView(DetailView):
+    model = Question
     template_name = 'jam_vote/answer.html'
+
+    def get_context_data(self, *args, **kwargs):
+        detail_data = Question.objects.get(id=self.kwargs['pk'])
+        team_list = Team.objects.filter(title_id=self.kwargs['pk'])
+        context = {
+            'object': detail_data,
+            'team_list': team_list,
+        }
+        return context
