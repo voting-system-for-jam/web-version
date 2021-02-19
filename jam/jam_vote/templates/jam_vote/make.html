@@ -6,48 +6,58 @@
         <h2>Post登録・更新</h2>
         <br>
 
-        <form action="" method="post"　enctype='multipart/form-data'>
+        <form action=""
+            method="post"
+            　enctype='multipart/form-data'>
             {% csrf_token %}　
-            <div class="form-group" id="file-area">
-                <!-- <label>タイトル</label> -->
+            <div class="form-group"
+                id="file-area">
+                <h3>タイトル</h3>
                 {{ question.title }}
+                <h3>全体チーム</h3>
                 {{ formset.management_form }}
                 {% for form in formset %}
+                <p>チーム名</p>
                 {{ form.DELETE }}
                 <p>{{ form.teamname }}</p>
                 {% endfor %}
                 <!-- {{formset}} -->
             </div>
-            <button type="submit" class="btn btn-primary">保存</button>
-            <button id="add" type="button" class="btn btn-primary">ファイルの追加</button>
+            <button type="submit"
+                class="btn btn-primary">保存</button>
+            <button id="add"
+                type="button"
+                class="btn btn-primary">ファイルの追加</button>
             <br><br>
         </form>
-        
+
     </div>
 </div>
 
 {% endblock %}
 
 {% block extrajs%}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 <script>
-    $(function(){
+    $(function () {
         var initialManageElement = $('input#id_team_set-INITIAL_FORMS');
         console.log(initialManageElement);
         var totalManageElement = $('input#id_team_set-TOTAL_FORMS');
         var currentFileCount = parseInt(totalManageElement.val());
-        $('button#add').on('click', function(){
+        $('button#add').on('click', function () {
             var nameElement = $('<input>', {
                 type: 'text',
                 name: 'team_set-' + currentFileCount + '-teamname',
                 id: 'id_team_set-' + currentFileCount + '-teamname',
                 maxlength: '30',
-                class:"form-control",
+                class: "form-control",
             });
             var deleteElement = $('<input>', {
-                type:"checkbox",
-                name:"team_set-" + currentFileCount + "-DELETE",
-                id:"id_team_set-" + currentFileCount + "-DELETE",
+                type: "checkbox",
+                name: "team_set-" + currentFileCount + "-DELETE",
+                id: "id_team_set-" + currentFileCount + "-DELETE",
             });
             $('div#file-area').append(deleteElement);
             $('div#file-area').append(nameElement);
@@ -56,5 +66,5 @@
             totalManageElement.attr('value', currentFileCount);
         });
     });
-    </script>    
+</script>
 {% endblock%}

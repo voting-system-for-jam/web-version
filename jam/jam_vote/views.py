@@ -9,7 +9,14 @@ from .forms import QuestionForm, TeamForm, PostCreateFormSet
 
 class Index(TemplateView):
     template_name = 'jam_vote/index.html'
-
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        question_list = Question.objects.all().order_by('id')
+        context = {
+            'question_list':question_list,
+        }
+        return context
     # model(データベース)から色々引っ張ってくる
     # def get_context_data(self, *args, **kwargs):
     #     context = super().get_context_data(**kwargs)

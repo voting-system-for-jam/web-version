@@ -3,7 +3,27 @@
 
 <h1>hello</h1>
 
-<a href="{% url 'jam_vote:make' %}" class="btn btn-primary">投票を作る</a>
-<a href="/admin" target="_blank" class="btn btn-secondary">管理画面に飛ぶ</a>
+<a href="{% url 'jam_vote:make' %}"
+    class="btn btn-primary">投票を作る</a>
+<a href="/admin"
+    target="_blank"
+    class="btn btn-secondary">管理画面に飛ぶ</a>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the
+            card's content.
+        </p>
+        <a type="button"
+            class="btn btn-primary"
+            href="{% url 'jam_vote:answer' %}">Button</a>
+    </div>
+</div>
+
+{% for title in question_list %}
+<p>{{title.title}}</p>
+{% endfor %}
 
 {% endblock %}
