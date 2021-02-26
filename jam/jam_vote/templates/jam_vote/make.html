@@ -1,6 +1,8 @@
 {% extends 'jam_vote/base.html' %}
 {% block content %}
 
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <div class="row">
     <div class="col-md-9">
         <h2>Post登録・更新</h2>

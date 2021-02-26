@@ -3,6 +3,8 @@
 
 <h1>hello</h1>
 
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <a href="{% url 'jam_vote:make' %}"
     class="btn btn-primary">投票を作る</a>
 <a href="/admin"
