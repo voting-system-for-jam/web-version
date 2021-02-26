@@ -3,48 +3,55 @@
 
 <h1>{{object.title}}</h1>
 
-<div class="card text-white bg-success mb-3" style="max-width: 18rem">
-    <div class="card-header">あなたのチーム</div>
-    <div class="card-body">
-        <p class="card-text">
-            あなたのチームを選んでください
-        </p>
-        <select class="select form-select">
-            {% for team in team_list %}
-            <option value="1">{{ team.teamname }}</option>
-            {% endfor %}
-        </select>
-    </div>
-</div>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<div class="card text-white bg-warning mb-3" style="max-width: 18rem">
-    <div class="card-header">トリにしたいチーム</div>
-    <div class="card-body">
-        <p class="card-text">
-            トリにしたいチームを選んでください
-        </p>
-        <select class="select form-select">
-            {% for team in team_list %}
-            <option value="1">{{ team.teamname }}</option>
-            {% endfor %}
-        </select>
+<form action="{% url 'jam_vote:vote' object.id %}" method="post">
+    {% csrf_token %}
+    
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem">
+        <div class="card-header">あなたのチーム</div>
+        <div class="card-body">
+            <p class="card-text">
+                あなたのチームを選んでください
+            </p>
+            <select name= 'your_team' class="select form-select">
+                {% for team in team_list %}
+                <option value="{{ team.id }}" name='your_team'>{{ team.teamname }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="card text-white bg-danger mb-3" style="max-width: 18rem">
-    <div class="card-header">好きなチーム</div>
-    <div class="card-body">
-        <p class="card-text">
-            好きなチームを選んでください
-        </p>
-        <select class="select form-select">
-            {% for team in team_list %}
-            <option value="1">{{ team.teamname }}</option>
-            {% endfor %}
-        </select>
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem">
+        <div class="card-header">トリにしたいチーム</div>
+        <div class="card-body">
+            <p class="card-text">
+                トリにしたいチームを選んでください
+            </p>
+            <select name='favorite_team' class="select form-select">
+                {% for team in team_list %}
+                <option value="{{ team.id }}">{{ team.teamname }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
-</div>
 
-<a href="{% url 'jam_vote:make' %}" class="btn btn-primary">投票</a>
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem">
+        <div class="card-header">好きなチーム</div>
+        <div class="card-body">
+            <p class="card-text">
+                好きなチームを選んでください
+            </p>
+            <select name='best_team' class="select form-select">
+                {% for team in team_list %}
+                <option value="{{ team.id }}">{{ team.teamname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    
+    <input type='submit' class="btn btn-primary" value="投票">
+</form>
+
 
 {% endblock %}
