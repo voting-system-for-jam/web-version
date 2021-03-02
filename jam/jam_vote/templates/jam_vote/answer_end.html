@@ -1,8 +1,10 @@
 {% extends 'jam_vote/base.html' %}
 {% block content %}
 
-<h1>投票ありがとうございました！</h1>
+<h1 class="title">投票ありがとうございました！</h1>
 
-<a href="{% url 'jam_vote:index' %}" class="btn btn-primary">戻る</a>
+<div class="card card-rem">
+    <a href="{% url 'jam_vote:index' %}" class="btn btn-primary">戻る</a>
+</div>
 
 {% endblock %}
