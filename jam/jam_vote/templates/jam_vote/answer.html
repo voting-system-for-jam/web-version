@@ -1,14 +1,14 @@
 {% extends 'jam_vote/base.html' %}
 {% block content %}
 
-<h1>{{object.title}}</h1>
+<h1 class="title">{{object.title}}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'jam_vote:vote' object.id %}" method="post">
     {% csrf_token %}
     
-    <div class="card text-white bg-success mb-3" style="max-width: 18rem">
+    <div class="card text-white bg-danger mb-3 card-rem" style="background-color: red">
         <div class="card-header">あなたのチーム</div>
         <div class="card-body">
             <p class="card-text">
@@ -22,11 +22,11 @@
         </div>
     </div>
 
-    <div class="card text-white bg-warning mb-3" style="max-width: 18rem">
+    <div class="card text-white bg-secondary mb-3 card-rem" style="background-color: #9575CD">
         <div class="card-header">トリにしたいチーム</div>
         <div class="card-body">
             <p class="card-text">
-                トリにしたいチームを選んでください
+                トリにしたいチームを<br>選んでください
             </p>
             <select name='favorite_team' class="select form-select">
                 {% for team in team_list %}
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem">
+    <div class="card text-white bg-success mb-3 card-rem" style="background-color: #9575CD">
         <div class="card-header">好きなチーム</div>
         <div class="card-body">
             <p class="card-text">
@@ -50,7 +50,9 @@
         </div>
     </div>
     
-    <input type='submit' class="btn btn-primary" value="投票">
+    <div class="card card-rem">
+        <input type='submit' class="btn btn-primary" value="投票">
+    </div>
 </form>
 
 

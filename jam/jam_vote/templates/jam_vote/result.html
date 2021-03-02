@@ -1,26 +1,30 @@
 {% extends 'jam_vote/base.html' %}
 {% block content %}
 
-<h1>{{ question.title }}</h1>
+<h1 class=title>{{ question.title }}</h1>
 
-<ul>
-    <h3>メンバー数</h3>
-    {% for team in question.team_set.all %}
-    <li>{{ team.teamname }} -- {{ team.yourTeamCount }} {{ team.yourTeamCount|pluralize }}</li>
-    {% endfor %}
-
-    <h3>好きなチームの結果</h3>
-    {% for team in question.team_set.all %}
-    <li>{{ team.teamname }} -- {{ team.favoriteTeamCount }} {{ team.favoriteTeamCount|pluralize }}</li>
-    {% endfor %}
-
-    <h3>トリにしたいチームの結果</h3>
-    {% for team in question.team_set.all %}
-    <li>{{ team.teamname }} -- {{ team.bestTeamCount }} {{ team.bestTeamCount|pluralize }}</li>
-    {% endfor %}
-
-</ul>
-
-<a href="{% url 'jam_vote:index' %}" class="btn btn-primary">タイトルに戻る</a>
-
-{% endblock %}
+<div class="bg-white">
+    
+    <ul>
+        <h3>メンバー数</h3>
+        {% for team in question.team_set.all %}
+        <li>{{ team.teamname }} -- {{ team.yourTeamCount }} {{ team.yourTeamCount|pluralize }}</li>
+        {% endfor %}
+        
+        <h3>好きなチームの結果</h3>
+        {% for team in question.team_set.all %}
+        <li>{{ team.teamname }} -- {{ team.favoriteTeamCount }} {{ team.favoriteTeamCount|pluralize }}</li>
+        {% endfor %}
+        
+        <h3>トリにしたいチームの結果</h3>
+        {% for team in question.team_set.all %}
+        <li>{{ team.teamname }} -- {{ team.bestTeamCount }} {{ team.bestTeamCount|pluralize }}</li>
+        {% endfor %}
+        
+    </ul>
+    <div class="card card-rem">
+        <a href="{% url 'jam_vote:index' %}" class="btn btn-primary">タイトルに戻る</a>
+    </div>
+    
+</div>
+    {% endblock %}
