@@ -20,6 +20,7 @@
         {% for team in question.team_set.all %}
         <li>{{ team.teamname }} -- {{ team.bestTeamCount }} {{ team.bestTeamCount|pluralize }}</li>
         {% endfor %}
+        <img src="{% url 'jam_vote:img_plot' %}" alt="グラフ" width="300" height="300">
         
     </ul>
     <div class="card card-rem">

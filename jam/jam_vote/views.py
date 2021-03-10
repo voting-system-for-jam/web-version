@@ -4,8 +4,12 @@ from django.urls import reverse_lazy
 
 from .models import Question, Team
 from .forms import QuestionForm, TeamForm, PostCreateFormSet
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect,HttpResponse
 from django.urls.base import reverse
+
+import io
+# matplotlibをimport
+import matplotlib.pyplot as plt
 
 # Create your views here.
 
@@ -61,10 +65,30 @@ class AnswerView(DetailView):
 class AnswerEndView(TemplateView):
     template_name = 'jam_vote/answer_end.html'
 
+
 class ResultsView(DetailView):
     model = Question
     template_name = 'jam_vote/result.html'
 
+#png画像形式に変換数関数
+def plt2png():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=200)
+    s = buf.getvalue()
+    buf.close()
+    return s
+
+#画像埋め込み用view
+def img_plot(request):
+    # matplotを使って作図する
+    x = [1, 5, 9]
+    y = [4, 6, 8]
+    ax = plt.subplot()
+    ax.scatter(x, y)
+    png = plt2png()
+    plt.cla()
+    response = HttpResponse(png, content_type='image/png')
+    return response
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

@@ -6,6 +6,7 @@ RUN apt-get -y update \
     && python3 get-pip.py \
     && pip install -U pip \
     && pip install psycopg2-binary \
+    && pip install matplotlib \
     && mkdir /code \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
