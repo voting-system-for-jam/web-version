@@ -4,28 +4,32 @@
 <h1 class=title>{{ question.title }}</h1>
 
 <div class="bg-white">
-    
+
     <ul>
         <h3>メンバー数</h3>
         {% for team in question.team_set.all %}
         <li>{{ team.teamname }} -- {{ team.yourTeamCount }} {{ team.yourTeamCount|pluralize }}</li>
         {% endfor %}
-        
+
         <h3>好きなチームの結果</h3>
         {% for team in question.team_set.all %}
         <li>{{ team.teamname }} -- {{ team.favoriteTeamCount }} {{ team.favoriteTeamCount|pluralize }}</li>
         {% endfor %}
-        
+
         <h3>トリにしたいチームの結果</h3>
         {% for team in question.team_set.all %}
         <li>{{ team.teamname }} -- {{ team.bestTeamCount }} {{ team.bestTeamCount|pluralize }}</li>
         {% endfor %}
-        <img src="{% url 'jam_vote:img_plot' %}" alt="グラフ" width="300" height="300">
-        
+        <img src="{% url 'jam_vote:img_plot' object.id %}"
+            alt="グラフ"
+            width="700"
+            height="500">
+
     </ul>
     <div class="card card-rem">
-        <a href="{% url 'jam_vote:index' %}" class="btn btn-primary">タイトルに戻る</a>
+        <a href="{% url 'jam_vote:index'%}"
+            class="btn btn-primary">タイトルに戻る</a>
     </div>
-    
+
 </div>
-    {% endblock %}
+{% endblock %}
