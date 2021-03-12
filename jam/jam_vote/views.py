@@ -83,8 +83,6 @@ def img_plot(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     detail_data = Question.objects.get(id=question_id)
     team_list = Team.objects.filter(title_id=question_id)
-    print(team_list.count)
-    # get_context_dataみたいにデータを取得できるようにする
     x = []
     y = []
     p = []
@@ -97,7 +95,6 @@ def img_plot(request, question_id):
             p.append(team.teamname)
             q.append(team.bestTeamCount)
     except (KeyError, Team.DoesNotExist):
-        print('よばれた')
         return render(request, 'jam_vote/index.html', {
             'question': question,
             'error_message': "選択していない選択肢があります",
