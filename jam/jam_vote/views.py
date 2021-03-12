@@ -4,8 +4,12 @@ from django.urls import reverse_lazy
 
 from .models import Question, Team
 from .forms import QuestionForm, TeamForm, PostCreateFormSet
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect,HttpResponse
 from django.urls.base import reverse
+
+import io
+# matplotlibをimport
+import matplotlib.pyplot as plt
 
 # Create your views here.
 
@@ -61,10 +65,52 @@ class AnswerView(DetailView):
 class AnswerEndView(TemplateView):
     template_name = 'jam_vote/answer_end.html'
 
+
 class ResultsView(DetailView):
     model = Question
     template_name = 'jam_vote/result.html'
 
+#png画像形式に変換数関数
+def plt2png():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=200)
+    s = buf.getvalue()
+    buf.close()
+    return s
+
+#画像埋め込み用view
+def img_plot(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    detail_data = Question.objects.get(id=question_id)
+    team_list = Team.objects.filter(title_id=question_id)
+    x = []
+    y = []
+    p = []
+    q = []
+    try:
+        for team in question.team_set.all():
+            x.append(team.teamname)
+            y.append(team.favoriteTeamCount)
+        for team in question.team_set.all():
+            p.append(team.teamname)
+            q.append(team.bestTeamCount)
+    except (KeyError, Team.DoesNotExist):
+        return render(request, 'jam_vote/index.html', {
+            'question': question,
+            'error_message': "選択していない選択肢があります",
+        })
+
+    # matplotを使って作図する
+    fig, ax = plt.subplots(nrows=1, ncols=2)
+    fig.autofmt_xdate(rotation=45)
+    ax[0].set_title('FavoriteTeam')
+    ax[1].set_title('BestTeam')
+    ax[0].bar(x, y)
+    ax[1].bar(p, q)
+    png = plt2png()
+    plt.cla()
+    response = HttpResponse(png, content_type='image/png')
+    return response
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

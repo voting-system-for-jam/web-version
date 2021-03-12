@@ -2,37 +2,42 @@
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="bg-white">
 
-<div class="row">
-    <div class="col-md-9">
-        <h2>Post登録・更新</h2>
-        <br>
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Post登録・更新</h2>
+            <br>
 
-        <form action=""
-            method="post"
-            　enctype='multipart/form-data'>
-            {% csrf_token %}　
-            <div class="form-group"
-                id="file-area">
-                <h3>タイトル</h3>
-                {{ question.title }}
-                <h3>全体チーム</h3>
-                {{ formset.management_form }}
-                {% for form in formset %}
-                <p>チーム名</p>
-                {{ form.DELETE }}
-                <p>{{ form.teamname }}</p>
-                {% endfor %}
-                <!-- {{formset}} -->
-            </div>
-            <button type="submit"
-                class="btn btn-primary">保存</button>
-            <button id="add"
-                type="button"
-                class="btn btn-primary">ファイルの追加</button>
-            <br><br>
-        </form>
-
+            <form action=""
+                method="post"
+                enctype='multipart/form-data'>
+                {% csrf_token %}　
+                <div class="form-group card"
+                    id="file-area">
+                    <h3>タイトル</h3>
+                    {{ question.title }}
+                    <h3>全体チーム</h3>
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                    <p>チーム名</p>
+                    {{ form.DELETE }}
+                    <p>{{ form.teamname }}</p>
+                    {% endfor %}
+                    <!-- {{formset}} -->
+                </div>
+                <div class="card card-rem">
+                    <button type="submit"
+                        class="btn btn-primary">保存</button>
+                </div>
+                <div class="card card-rem">
+                    <button id="add"
+                        type="button"
+                        class="btn btn-success">ファイルの追加</button>
+                </div>
+                <br><br>
+            </form>
+        </div>
     </div>
 </div>
 
