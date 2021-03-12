@@ -103,7 +103,7 @@ def img_plot(request, question_id):
     # matplotを使って作図する
     fig, ax = plt.subplots(nrows=1, ncols=2)
     fig.autofmt_xdate(rotation=45)
-    ax[0].set_title('FavoriteTeam')
+    ax[0].set_title('お気に入りのチーム')
     ax[1].set_title('BestTeam')
     ax[0].bar(x, y)
     ax[1].bar(p, q)
