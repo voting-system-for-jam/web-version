@@ -3,3 +3,8 @@ numpy
 pandas
 matplotlib
 seaborn
+
+# herokuように追加
+gunicorn
+django-heroku
+dj-database-url
