@@ -1,1 +1,1 @@
-web: gunicorn jam.wsgi
+web: gunicorn  --bind 0:8001 jam.wsgi
