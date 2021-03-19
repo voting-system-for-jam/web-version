@@ -18,7 +18,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.prod .;
+    docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f DockerFile.prod .;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
     heroku run --app registry.heroku.com/$HEROKU_APP_NAME/web python3 manage.py migrate
   on:
