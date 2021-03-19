@@ -31,8 +31,8 @@ RUN curl -L  "https://moji.or.jp/wp-content/ipafont/IPAexfont/IPAexfont00401.zip
 COPY . .
 
 # サーバーを立てる場所に移動
-WORKDIR /web-version/jam
+# WORKDIR /web-version/jam
 # これでbashとか使わずにrunするだけでサーバーが立つ
-CMD  python3 manage.py runserver 0:8001
+CMD  gunicorn --bind 0.0.0.0:8001 jam.wsgi
 
 # EXPOSE 8001
