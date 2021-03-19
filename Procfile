@@ -1,1 +1,1 @@
-web: gunicorn jam.jam.wsgi
+web: gunicorn jam.wsgi --log-file -
