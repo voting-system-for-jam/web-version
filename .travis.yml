@@ -20,7 +20,7 @@ deploy:
   script:
     docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f DockerFile.prod .;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-    heroku run --app $HEROKU_APP_NAME cd /web-version/jam
-    heroku run --app $HEROKU_APP_NAME python3 manage.py migrate
+    # heroku run --app $HEROKU_APP_NAME cd /web-version/jam
+    # heroku run --app $HEROKU_APP_NAME python3 manage.py migrate
   on:
     branch: prepare-deploy
