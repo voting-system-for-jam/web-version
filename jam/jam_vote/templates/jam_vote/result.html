@@ -30,6 +30,10 @@
         <a href="{% url 'jam_vote:index'%}"
             class="btn btn-primary">タイトルに戻る</a>
     </div>
+    <div class="card card-rem">
+        <a href="{% url 'jam_vote:delete' object.id%}"
+            class="btn btn-danger">この投票を削除する</a>
+    </div>
 
 </div>
 {% endblock %}
