@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'jam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name',
-        'USER': 'user',
-        'PASSWORD': '',
-        'HOST': 'host',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '',
     }
 }
