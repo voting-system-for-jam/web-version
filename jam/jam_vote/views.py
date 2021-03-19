@@ -1,11 +1,12 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
+from django.http.response import HttpResponseRedirect,HttpResponse
+from django.urls.base import reverse
+from django.contrib import messages
 
 from .models import Question, Team
 from .forms import QuestionForm, TeamForm, PostCreateFormSet
-from django.http.response import HttpResponseRedirect,HttpResponse
-from django.urls.base import reverse
 
 import io
 # matplotlibをimport
@@ -60,6 +61,13 @@ class AnswerView(DetailView):
             'team_list': team_list,
         }
         return context
+
+class DelView(DeleteView):
+    model = Question
+    template_name = 'jam_vote/delete.html'
+
+    def get_success_url(self):
+        return resolve_url('jam_vote:index')
 
 
 class AnswerEndView(TemplateView):
