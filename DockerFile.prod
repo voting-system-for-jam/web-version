@@ -33,6 +33,6 @@ COPY ./jam .
 # サーバーを立てる場所に移動
 # WORKDIR /jam
 # これでbashとか使わずにrunするだけでサーバーが立つ
-CMD  gunicorn --bind 0.0.0.0:8001 jam.wsgi
+CMD  python3 manage.py runserver 0:8001
 
 # EXPOSE 8001
